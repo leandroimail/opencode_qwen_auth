@@ -1,4 +1,4 @@
-import { readQwenCredentials } from "../src/qwen/credentials";
+import { readQwenCredentials } from "../src/qwen/credentials.js";
 
 async function main() {
   console.log("Verifying Qwen Credentials...");

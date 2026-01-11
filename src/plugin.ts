@@ -1,53 +1,17 @@
-import { QWEN_PROVIDER_ID } from "./constants";
-import { readQwenCredentials } from "./qwen/credentials";
+import { QWEN_PROVIDER_ID } from "./constants.js";
+import { readQwenCredentials } from "./qwen/credentials.js";
 import type {
   GetAuth,
   LoaderResult,
   PluginContext,
   PluginResult,
   Provider,
-} from "./plugin/types";
+  Config
+} from "./plugin/types.js";
 
 export const QwenCLIAuthPlugin = async (
   { client }: PluginContext,
 ): Promise<PluginResult> => ({
-  async config(config) {
-    config.provider = config.provider ?? {};
-    const existing = config.provider[QWEN_PROVIDER_ID] ?? {};
-
-    config.provider[QWEN_PROVIDER_ID] = {
-      ...existing,
-      npm: existing.npm ?? "@ai-sdk/openai-compatible",
-      name: existing.name ?? "Qwen",
-      options: {
-        ...existing.options,
-        baseURL: existing.options?.baseURL ?? "https://dashscope.aliyuncs.com/compatible-mode/v1",
-      },
-      models: {
-        ...existing.models,
-        "qwen-2.5-coder-32b-instruct": {
-          name: "Qwen 2.5 Coder 32B",
-          ...existing.models?.["qwen-2.5-coder-32b-instruct"],
-        },
-        "qwen-plus": {
-          name: "Qwen Plus",
-          ...existing.models?.["qwen-plus"],
-        },
-        "qwen-max": {
-          name: "Qwen Max",
-          ...existing.models?.["qwen-max"],
-        },
-        "coder-model": {
-          name: "Qwen3 Coder Plus (Default)",
-          ...existing.models?.["coder-model"],
-        },
-        "vision-model": {
-          name: "Qwen3 Vision Plus",
-          ...existing.models?.["vision-model"],
-        }
-      },
-    };
-  },
   auth: {
     provider: QWEN_PROVIDER_ID,
     loader: async (getAuth: GetAuth, provider: Provider): Promise<LoaderResult | null> => {
@@ -71,7 +35,7 @@ export const QwenCLIAuthPlugin = async (
 
       return {
         apiKey: "",
-        async fetch(input, init) {
+        async fetch(input: RequestInfo | URL, init?: RequestInit) {
             const headers = new Headers(init?.headers);
             headers.set("Authorization", `Bearer ${qwenAuth.access}`);
             return fetch(input, { ...init, headers });

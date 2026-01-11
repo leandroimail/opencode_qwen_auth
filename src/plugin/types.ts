@@ -1,4 +1,4 @@
-import type { QwenCredentials } from "../qwen/credentials";
+import type { QwenCredentials } from "../qwen/credentials.js";
 
 export interface AuthMethod {
   label: string;
