@@ -36,6 +36,18 @@ It also **automatically configures** the Qwen provider in OpenCode, so you don't
 4.  The plugin will authenticate.
 5.  Open the Model Picker (`Cmd+K`). You will see **Qwen** listed with models like `Qwen 2.5 Coder 32B`, `Qwen3 Coder Plus (Default)`, etc.
 
+## Supported Models
+
+The following models are automatically configured by the plugin:
+
+- `coder-model`: **Qwen3 Coder Plus** (Default Qwen CLI model)
+- `vision-model`: **Qwen3 Vision Plus** (Multimodal/Image support)
+- `qwen-2.5-coder-32b-instruct`: Qwen 2.5 Coder 32B
+- `qwen-plus`: Qwen Plus
+- `qwen-max`: Qwen Max
+
+Note that `coder-model` and `vision-model` correspond to the generic aliases used by the Qwen CLI Free Tier/OAuth.
+
 ## Troubleshooting
 
 -   **Models not showing?** Restart OpenCode after adding the plugin.
