@@ -11,6 +11,35 @@ import type {
 export const QwenCLIAuthPlugin = async (
   { client }: PluginContext,
 ): Promise<PluginResult> => ({
+  async config(config) {
+    config.provider = config.provider ?? {};
+    const existing = config.provider[QWEN_PROVIDER_ID] ?? {};
+
+    config.provider[QWEN_PROVIDER_ID] = {
+      ...existing,
+      npm: existing.npm ?? "@ai-sdk/openai-compatible",
+      name: existing.name ?? "Qwen",
+      options: {
+        ...existing.options,
+        baseURL: existing.options?.baseURL ?? "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      },
+      models: {
+        ...existing.models,
+        "qwen-2.5-coder-32b-instruct": {
+          name: "Qwen 2.5 Coder 32B",
+          ...existing.models?.["qwen-2.5-coder-32b-instruct"],
+        },
+        "qwen-plus": {
+          name: "Qwen Plus",
+          ...existing.models?.["qwen-plus"],
+        },
+        "qwen-max": {
+          name: "Qwen Max",
+          ...existing.models?.["qwen-max"],
+        },
+      },
+    };
+  },
   auth: {
     provider: QWEN_PROVIDER_ID,
     loader: async (getAuth: GetAuth, provider: Provider): Promise<LoaderResult | null> => {

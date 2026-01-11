@@ -2,7 +2,9 @@
 
 **Authenticate OpenCode with your Qwen Coder account.**
 
-This plugin enables you to use your existing Qwen Coder CLI credentials directly within OpenCode. It reads the credentials from `~/.qwen/oauth_creds.json`.
+This plugin enables you to use your existing Qwen Coder CLI credentials directly within OpenCode. It reads the credentials from `~/.qwen/oauth_creds.json` and injects the authentication token into requests.
+
+It also **automatically configures** the Qwen provider in OpenCode, so you don't need to manually edit your `opencode.json` configuration file.
 
 ## Prerequisites
 
@@ -13,8 +15,6 @@ This plugin enables you to use your existing Qwen Coder CLI credentials directly
 
 ## Installation
 
-Since this plugin is local/forked:
-
 1.  Clone this repository.
 2.  Install dependencies:
     ```bash
@@ -24,7 +24,7 @@ Since this plugin is local/forked:
 
     ```json
     {
-      "plugin": ["file:///Users/leandro.ferreira/Desktop/Prompts/opencode_qwenauth_plugin"]
+      "plugin": ["file:///path/to/opencode_qwen_auth"]
     }
     ```
 
@@ -33,11 +33,13 @@ Since this plugin is local/forked:
 1.  Run **OpenCode**.
 2.  When prompted for authentication (or in the Auth settings), select **Qwen (CLI Auth)**.
 3.  Select **Load from Qwen CLI (~/.qwen/oauth_creds.json)**.
-4.  The plugin will read your token and authenticate.
+4.  The plugin will authenticate.
+5.  Open the Model Picker (`Cmd+K`). You will see **Qwen** listed with models like `Qwen 2.5 Coder 32B`, `Qwen Plus`, etc.
 
 ## Troubleshooting
 
--   **Token Expired**: If your token is expired, the plugin may fail to authenticate requests. Run `qwen login` in your terminal to refresh your credentials, then try again in OpenCode.
+-   **Models not showing?** Restart OpenCode after adding the plugin.
+-   **Token Expired**: Run `qwen login` in your terminal to refresh credentials.
 -   **File Not Found**: Ensure `~/.qwen/oauth_creds.json` exists.
 
 ## Development

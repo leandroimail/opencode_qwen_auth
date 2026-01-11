@@ -16,7 +16,13 @@ export interface PluginContext {
   client: PluginClient;
 }
 
+export interface Config {
+  provider?: Record<string, any>;
+  [key: string]: any;
+}
+
 export interface PluginResult {
+  config?: (config: Config) => Promise<void>;
   auth: {
     provider: string;
     loader: (getAuth: GetAuth, provider: Provider) => Promise<LoaderResult | null>;
