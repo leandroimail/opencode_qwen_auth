@@ -11,32 +11,32 @@ Create `opencode-qwen-auth`, a fork of `opencode-gemini-auth`, to enable Qwen Co
 ## 3. Architecture
 
 ### 3.1 Components
-1.  **Plugin Entry (`index.ts`)**:
-    -   Registers the auth provider with OpenCode.
-    -   Name: "Qwen (CLI Auth)".
-    -   Provider ID: `qwen`.
+1.  **Plugin Entry (`index.ts` / `src/plugin.ts`)**:
+    -   **Auth Hook**: Registers the auth provider with OpenCode (`qwen`).
+    -   **Config Hook**: Automatically registers the Provider and Models in OpenCode's configuration.
+        -   Sets `npm` package to `@ai-sdk/openai-compatible`.
+        -   Sets `baseURL` to `https://dashscope.aliyuncs.com/compatible-mode/v1`.
+        -   Registers default models (`coder-model`, `vision-model`, `qwen-plus`, etc.).
 
 2.  **Credential Manager (`src/qwen/credentials.ts`)**:
     -   **Reading**: Reads `~/.qwen/oauth_creds.json`.
     -   **Validation**: Checks if `access_token` is valid based on `expiry_date`.
-    -   **Refresh**: *Crucial*. If token is expired, attempts to refresh using `refresh_token`.
-        -   *Note*: The refresh endpoint needs to be identified (likely associated with `portal.qwen.ai`).
-        -   *Fallback*: If refresh fails, prompt user to run `qwen login` in CLI.
+    -   **Refresh**: Logic implemented to refresh token or warn user.
 
 3.  **Auth Provider Implementation (`src/plugin/auth.ts`)**:
     -   Implements OpenCode's AuthProvider interface.
     -   Returns the valid Bearer token to OpenCode.
 
 ## 4. Data Flow
-1.  OpenCode requests auth for "qwen".
-2.  Plugin reads `oauth_creds.json`.
-3.  Plugin checks expiry.
+1.  **Startup**: Plugin `config` hook runs -> Registers "Qwen" provider in OpenCode memory.
+2.  **Auth Request**: OpenCode requests auth for "qwen".
+3.  **Token Retrieval**: Plugin reads `oauth_creds.json`.
+4.  **Validation**: Plugin checks expiry.
     -   If valid -> Return token.
-    -   If expired -> Call Refresh Endpoint -> Update `oauth_creds.json` (optional, but good practice) -> Return new token.
-4.  OpenCode attaches token to request.
+    -   If expired -> (Optional) Call Refresh -> Return new token.
+5.  **API Call**: OpenCode uses `@ai-sdk/openai-compatible` to call DashScope API, injecting the Bearer token provided by the plugin.
 
 ## 5. Key Changes from Gemini Plugin
 -   **Path**: Change `~/.config/google-cloud/...` to `~/.qwen/oauth_creds.json`.
--   **Endpoints**: Change Google OAuth endpoints to Qwen endpoints (to be determined).
--   **Scopes**: Qwen likely has different scopes (or ignored if just using CLI token).
-
+-   **Endpoints**: Change Google OAuth endpoints to Qwen endpoints.
+-   **Programmatic Config**: Added `config` hook (missing in Gemini plugin) to ensure models appear in UI without manual user config.

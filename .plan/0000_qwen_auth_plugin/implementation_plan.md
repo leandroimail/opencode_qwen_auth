@@ -26,3 +26,12 @@
 - [x] **Task 4.2**: User Instructions.
     -   *Description*: Document how to link the plugin to OpenCode and how to handle login/refresh.
 
+## Phase 5: Provider & Model Registration (New)
+- [x] **Task 5.1**: Research Provider Registration.
+    -   *Description*: Determine how to register LLM providers programmatically in OpenCode plugins.
+- [x] **Task 5.2**: Implement Config Hook.
+    -   *Description*: Implement the `config` hook in `src/plugin.ts` to register the `qwen` provider with `@ai-sdk/openai-compatible`.
+- [x] **Task 5.3**: Register Models.
+    -   *Description*: Add `coder-model`, `vision-model`, `qwen-plus`, etc., to the configuration object.
+- [x] **Task 5.4**: Documentation Update.
+    -   *Description*: Create `docs/INTEGRATION.md` and update `README.md` with new features.

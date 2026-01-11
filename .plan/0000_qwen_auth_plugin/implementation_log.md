@@ -13,3 +13,12 @@
   - Removed unused Google OAuth logic.
   - Verified with `scripts/verify-auth.ts`.
   - Updated `README.md`.
+- **Sun Jan 11 15:30:00 -03 2026**: Fixed OpenCode Integration.
+  - Investigated issue where Qwen models were not appearing in OpenCode.
+  - Discovered that providers must be registered in configuration, not just auth.
+  - Implemented `config` hook in `src/plugin.ts` to programmatically register the provider.
+  - Configured `@ai-sdk/openai-compatible` as the backend.
+  - Set default models (`qwen-2.5-coder`, `qwen-plus`, `qwen-max`).
+  - Added `coder-model` (Qwen3 Coder Plus) and `vision-model` (Qwen3 Vision Plus) to match CLI defaults.
+  - Created `docs/INTEGRATION.md`.
+  - Published to GitHub: `leandroimail/opencode_qwen_auth`.
