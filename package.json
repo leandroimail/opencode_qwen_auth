@@ -3,7 +3,7 @@
   "module": "index.ts",
   "version": "0.0.1",
   "author": "Leandro Ferreira",
-  "repository": "",
+  "repository": "https://github.com/leandroimail/opencode_qwen_auth",
   "files": [
     "index.ts",
     "src"
