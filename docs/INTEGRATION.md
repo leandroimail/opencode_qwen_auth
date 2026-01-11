@@ -10,7 +10,7 @@ This plugin uses two OpenCode hooks:
     -   Programmatically registers the `qwen` provider in OpenCode's configuration.
     -   Sets the `@ai-sdk/openai-compatible` adapter.
     -   Configures the `baseURL` to `https://dashscope.aliyuncs.com/compatible-mode/v1`.
-    -   Registers default models (`qwen-2.5-coder-32b-instruct`, `qwen-plus`, `qwen-max`).
+    -   Registers default models (`qwen-2.5-coder-32b-instruct`, `qwen-plus`, `qwen-max`, `coder-model`, `vision-model`).
 
 2.  **`auth` Hook**:
     -   Registers an Auth Provider with ID `qwen`.

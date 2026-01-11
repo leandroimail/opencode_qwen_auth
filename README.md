@@ -34,7 +34,7 @@ It also **automatically configures** the Qwen provider in OpenCode, so you don't
 2.  When prompted for authentication (or in the Auth settings), select **Qwen (CLI Auth)**.
 3.  Select **Load from Qwen CLI (~/.qwen/oauth_creds.json)**.
 4.  The plugin will authenticate.
-5.  Open the Model Picker (`Cmd+K`). You will see **Qwen** listed with models like `Qwen 2.5 Coder 32B`, `Qwen Plus`, etc.
+5.  Open the Model Picker (`Cmd+K`). You will see **Qwen** listed with models like `Qwen 2.5 Coder 32B`, `Qwen3 Coder Plus (Default)`, etc.
 
 ## Troubleshooting
 

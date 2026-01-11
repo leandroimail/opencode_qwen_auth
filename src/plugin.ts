@@ -37,6 +37,14 @@ export const QwenCLIAuthPlugin = async (
           name: "Qwen Max",
           ...existing.models?.["qwen-max"],
         },
+        "coder-model": {
+          name: "Qwen3 Coder Plus (Default)",
+          ...existing.models?.["coder-model"],
+        },
+        "vision-model": {
+          name: "Qwen3 Vision Plus",
+          ...existing.models?.["vision-model"],
+        }
       },
     };
   },
