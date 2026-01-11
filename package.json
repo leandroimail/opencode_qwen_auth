@@ -1,0 +1,20 @@
+{
+  "name": "opencode-qwen-auth",
+  "module": "index.ts",
+  "version": "0.0.1",
+  "author": "Leandro Ferreira",
+  "repository": "",
+  "files": [
+    "index.ts",
+    "src"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.0.203",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
